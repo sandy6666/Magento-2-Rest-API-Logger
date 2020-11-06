@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Sandesh\WebApiLog
- * @author      Vlad Flonta
+ * @author      Sandesh
  * @copyright   Copyright © 2018
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -35,7 +35,8 @@ class Api
         \Magento\Webapi\Controller\Rest $subject,
         callable $proceed,
         \Magento\Framework\App\RequestInterface $request
-    ) {
+    )
+    {
         try {
             $this->currentRequest = [
                 'is_api' => true,
@@ -74,7 +75,8 @@ class Api
     public function afterSendResponse(
         \Magento\Framework\Webapi\Rest\Response $subject,
         $result
-    ) {
+    )
+    {
         try {
             foreach ($subject->getHeaders()->toArray() as $key => $value) {
                 $this->currentRequest['response']['headers'][$key] = $value;
@@ -94,7 +96,7 @@ class Api
      * @param string $path
      * @return bool
      */
-    protected function isAuthorizationRequest(string $path) : bool
+    protected function isAuthorizationRequest(string $path)
     {
         return preg_match('/integration\/(admin|customer)\/token/', $path) !== 0;
     }
